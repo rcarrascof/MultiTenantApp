@@ -177,9 +177,7 @@ Para crear una organización y un usuario inicial, puedes utilizar el siguiente 
   - **DELETE** `/api/{slugTenant}/products/{id}`
   - **Headers**: `Authorization: Bearer {jwt_token}`
 
-## Contribuciones
 
-Si deseas contribuir a este proyecto, por favor realiza un fork del repositorio, crea una nueva rama con tu funcionalidad, y envía un pull request.
 
 ## Licencia
 
