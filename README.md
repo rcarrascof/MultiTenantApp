@@ -64,3 +64,124 @@ El proyecto está dividido en varias capas siguiendo los principios de Clean Arc
 Para ejecutar la aplicación, utiliza el siguiente comando desde el directorio del proyecto `MultiTenantApp.API`:
 ```bash
 dotnet run
+
+La API estará disponible en `https://localhost:7213`.
+
+## Endpoints
+
+### Crear una Organización y un Usuario
+
+Para crear una organización y un usuario inicial, puedes utilizar el siguiente endpoint:
+
+- **Crear Organización y Usuario**
+  - **POST** `/api/organizations`
+  - **Headers**:
+    - `Content-Type`: `application/json`
+  - **Body**:
+    ```json
+    {
+      "OrganizationName": "New Organization",
+      "Slug": "new_org",
+      "Username": "newuser",
+      "Password": "newpassword"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "message": "Organization created successfully",
+      "organization": {
+        "id": 1,
+        "name": "New Organization",
+        "slug": "new_org"
+      }
+    }
+    ```
+
+### Autenticación
+
+- **Login**
+  - **POST** `/api/auth/login`
+  - **Body**:
+    ```json
+    {
+        "Username": "newuser",
+        "Password": "newpassword"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+        "token": "jwt_token",
+        "user": {
+            "id": 1,
+            "username": "newuser",
+            "organizationId": 1,
+            "organizationName": "New Organization"
+        }
+    }
+    ```
+
+### Gestión de Productos
+
+- **Obtener Producto por ID**
+  - **GET** `/api/{slugTenant}/products/{id}`
+  - **Headers**: `Authorization: Bearer {jwt_token}`
+  - **Response**:
+    ```json
+    {
+        "id": 1,
+        "name": "Product Name",
+        "price": 100.00
+    }
+    ```
+
+- **Obtener Lista de Productos**
+  - **GET** `/api/{slugTenant}/products`
+  - **Headers**: `Authorization: Bearer {jwt_token}`
+  - **Response**:
+    ```json
+    [
+        {
+            "id": 1,
+            "name": "Product Name",
+            "price": 100.00
+        }
+    ]
+    ```
+
+- **Crear Producto**
+  - **POST** `/api/{slugTenant}/products`
+  - **Headers**: `Authorization: Bearer {jwt_token}`
+  - **Body**:
+    ```json
+    {
+        "Name": "New Product",
+        "Price": 100.00
+    }
+    ```
+
+- **Actualizar Producto**
+  - **PUT** `/api/{slugTenant}/products/{id}`
+  - **Headers**: `Authorization: Bearer {jwt_token}`
+  - **Body**:
+    ```json
+    {
+        "Id": 1,
+        "Name": "Updated Product",
+        "Price": 150.00
+    }
+    ```
+
+- **Eliminar Producto**
+  - **DELETE** `/api/{slugTenant}/products/{id}`
+  - **Headers**: `Authorization: Bearer {jwt_token}`
+
+## Contribuciones
+
+Si deseas contribuir a este proyecto, por favor realiza un fork del repositorio, crea una nueva rama con tu funcionalidad, y envía un pull request.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Para más información, consulta el archivo [LICENSE](LICENSE).
+
