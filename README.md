@@ -24,7 +24,7 @@ El proyecto está dividido en varias capas siguiendo los principios de Clean Arc
 
 1. Clona el repositorio:
     ```bash
-    git clone https://github.com/tu_usuario/MultiTenantApp.git
+    git clone https://github.com/rcarrascof/MultiTenantApp.git
     cd MultiTenantApp
     ```
 
